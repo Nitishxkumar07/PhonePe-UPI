@@ -72,6 +72,7 @@ export default function Country() {
           gradient={false}
           speed={40}
           autoFill={true}
+          pauseOnHover={true}
         >
           <div className="flex items-center gap-8 px-4">
             {services.map((item) => (
@@ -84,6 +85,7 @@ export default function Country() {
           gradient={false}
           speed={40}
           autoFill={true}
+          pauseOnHover={true}
           direction="right"
         >
           <div className="flex items-center gap-8 px-4">
@@ -97,6 +99,7 @@ export default function Country() {
           gradient={false}
           speed={40}
           autoFill={true}
+          pauseOnHover={true}
         >
           <div className="flex items-center gap-8 px-4">
             {bank.map((item) => (

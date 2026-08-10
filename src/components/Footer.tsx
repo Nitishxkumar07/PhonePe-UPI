@@ -144,7 +144,7 @@ export const credit = [
 
 export const Footer = () => {
     return (
-        <div>
+        <div className='border border-transparent shadow-4xl mt-12'>
             <div className='flex flex-row gap-6 justify-evenly p-8 w-screen mb-5'>
                 <Link href={"/"}><img src="/assets/logo1.svg" alt="" className='h-12 w-24' /></Link>
                 {footerData.map((section) => (

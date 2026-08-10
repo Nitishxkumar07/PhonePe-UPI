@@ -80,7 +80,7 @@ export default function InvestmentSection() {
                 <img
                     src="/assets/back.png"
                     alt=""
-                    className="absolute inset-0 h-full w-full object-cover  rounded-[50%] animate-color-rotate bg-[conic-gradient(from_180deg,#2563EB_0deg,#2563EB_80deg,#FACC15_120deg,#FACC15_220deg,#2563EB_360deg)]"
+                    className="absolute inset-0 h-full w-full object-cover  rounded-[100%] animate-color-rotate bg-[conic-gradient(from_180deg,#2563EB_0deg,#2563EB_80deg,#FACC15_120deg,#FACC15_220deg,#2563EB_360deg)]"
                 />
                 {images.map((item, index) => (
                     <div key={index}>
