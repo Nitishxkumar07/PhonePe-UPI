@@ -3,7 +3,6 @@ import React from 'react'
 import Link from 'next/link'
 import { Company } from './Company'
 import { Oursolutions } from './Oursolutions'
-import QRScanner from './QRScanner'
 
 export const Navbar = () => {
   return (
