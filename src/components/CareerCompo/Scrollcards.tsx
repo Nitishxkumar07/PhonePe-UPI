@@ -27,126 +27,50 @@ const Scrollcards = () => {
   ];
 
   return (
-    <section className="bg-purple-950 px-4 py-16 sm:px-6 md:px-10 lg:px-16 xl:px-20">
+    <section className="bg-purple-950 px-4 py-12 sm:px-6 md:px-10">
       {/* Heading */}
-      <div className="mx-auto mb-12 max-w-7xl text-center text-white md:mb-16">
-        <p className="mb-4 text-sm font-medium uppercase tracking-[0.25em] text-purple-300 sm:text-base">
+      <div className="mx-auto mb-8 max-w-3xl text-center text-white md:mb-12">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-purple-300 sm:text-sm">
           Initiatives
         </p>
 
-        <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
-          Together We Grow :
-          <br className="hidden sm:block" />
+        <h2 className="text-2xl font-semibold leading-tight sm:text-3xl md:text-4xl">
+          Together We Grow :{" "}
           <span className="text-purple-200">
-            {" "}
             A Community Driven by Shared Purpose
           </span>
         </h2>
       </div>
 
       {/* Cards */}
-      <div className="relative mx-auto max-w-7xl">
-        {cards.map((item, index) => (
-          <div
-            key={item.title}
-            className="sticky top-16 flex min-h-[85vh] items-center justify-center py-8 sm:top-20 md:min-h-[90vh]"
-          >
-            <div
-              className="
-                flex w-full max-w-6xl
-                flex-col overflow-hidden
-                rounded-[28px]
-                bg-white shadow-2xl
-                sm:rounded-[36px]
-                md:flex-row
-                lg:rounded-[50px]
-              "
-            >
+      <div className="relative mx-auto max-w-3xl">
+        {cards.map((item) => (
+          <div key={item.title} className="sticky top-20 flex items-center justify-center py-4">
+            <div className="flex w-full flex-col overflow-hidden rounded-2xl bg-white shadow-xl sm:rounded-3xl md:flex-row">
               {/* Content */}
-              <div
-                className="
-                  flex w-full flex-col justify-center
-                  px-6 py-10
-                  sm:px-10 sm:py-12
-                  md:w-1/2 md:px-10
-                  lg:px-16 lg:py-16
-                "
-              >
-
-                <h3
-                  className="
-                    text-2xl font-semibold leading-tight text-gray-900
-                    sm:text-3xl
-                    md:text-3xl
-                    lg:text-4xl
-                  "
-                >
+              <div className="flex w-full flex-col justify-center p-5 sm:p-7 md:w-1/2">
+                <h3 className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">
                   {item.title}
                 </h3>
 
-                <p
-                  className="
-                    mt-5 text-sm leading-7 text-gray-500
-                    sm:mt-6 sm:text-base sm:leading-8
-                    lg:mt-8
-                  "
-                >
+                <p className="mt-3 text-xs leading-relaxed text-gray-600 sm:mt-4 sm:text-sm sm:leading-6">
                   {item.description}
                 </p>
 
-                <Link
-                  href="#"
-                  className="
-                    mt-7 inline-flex w-fit
-                    items-center gap-2
-                    rounded-full
-                    bg-[#5F259F]
-                    px-6 py-3
-                    text-sm font-medium text-white
-                    transition-all duration-300
-                    hover:bg-[#4B1E80]
-                    hover:px-7
-                    sm:mt-8 sm:px-8 sm:py-3
-                  "
-                >
+                <Link href="#" className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-[#5F259F] px-4 py-2 text-xs font-medium text-white transition-all duration-300 hover:bg-[#4B1E80] sm:mt-6 sm:px-6 sm:py-2.5 sm:text-sm">
                   Know More
-                  <span className="text-lg">→</span>
+                  <span className="text-sm">→</span>
                 </Link>
               </div>
 
               {/* Image */}
-              <div
-                className="
-                  flex w-full
-                  min-h-[280px]
-                  items-center justify-center
-                  bg-gray-50
-                  px-6 py-8
-                  sm:min-h-[350px]
-                  sm:px-10
-                  md:w-1/2
-                  md:min-h-[500px]
-                  lg:min-h-[600px]
-                "
-              >
+              <div className="flex w-full items-center justify-center bg-gray-50 p-6 md:w-1/2">
                 <Image
                   src={item.img}
-                  width={600}
-                  height={600}
+                  width={400}
+                  height={400}
                   alt={item.title}
-                  className="
-                    h-auto
-                    max-h-[280px]
-                    w-full
-                    max-w-[280px]
-                    object-contain
-                    sm:max-h-[350px]
-                    sm:max-w-[350px]
-                    md:max-h-[420px]
-                    md:max-w-[420px]
-                    lg:max-h-[500px]
-                    lg:max-w-125
-                  "
+                  className="h-auto max-h-44 w-full max-w-45 object-contain sm:max-h-56 sm:max-w-60"
                   unoptimized
                 />
               </div>
