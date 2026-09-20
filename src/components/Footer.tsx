@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
-import Link from 'next/link';
+import Link from 'next/link'
+
 export const footerData = [
     {
         title: "Business Solutions",
@@ -64,10 +65,7 @@ export const footerData = [
             { name: "Press", href: "#" },
             { name: "Ethics", href: "#" },
             { name: "Report Vulnerability", href: "#" },
-            {
-                name: "Merchant Partners",
-                href: "#",
-            },
+            { name: "Merchant Partners", href: "#" },
             { name: "Blog", href: "#" },
             { name: "Tech Blog", href: "#" },
             { name: "PhonePe Pulse", href: "#" },
@@ -96,42 +94,24 @@ export const footerData = [
 
     {
         title: "PhonePe Group",
-
         links: [
-            {
-                name: "Indus Appstore",
-                href: "#",
-                external: true,
-            },
-            {
-                name: "Share.Market",
-                href: "#",
-                external: true,
-            },
+            { name: "Indus Appstore", href: "#", external: true },
+            { name: "Share.Market", href: "#", external: true },
         ],
     },
 ]
+
 export const credit = [
     {
         creditCards: {
             title: "Credit Cards",
             links: [
-                {
-                    name: "PhonePe HDFC Bank Co-Branded Credit Cards",
-                    href: "#",
-                },
-                {
-                    name: "PhonePe SBI Card Co-Branded Credit Cards",
-                    href: "#",
-                },
-                {
-                    name: "Wish Credit Card",
-                    href: "#",
-                },
+                { name: "PhonePe HDFC Bank Co-Branded Credit Cards", href: "#" },
+                { name: "PhonePe SBI Card Co-Branded Credit Cards", href: "#" },
+                { name: "Wish Credit Card", href: "#" },
             ],
         },
     },
-
     {
         certification: {
             title: "Certification",
@@ -144,32 +124,94 @@ export const credit = [
 
 export const Footer = () => {
     return (
-        <div className='border border-transparent shadow-4xl mt-12'>
-            <div className='flex flex-row gap-6 justify-evenly p-8 w-screen mb-5'>
-                <Link href={"/"}><img src="/assets/logo1.svg" alt="" className='h-12 w-24' /></Link>
-                {footerData.map((section) => (
-                    <div key={section.title} className='flex flex-col mx-auto'>
-                        <h3 className="font-semibold text-lg  mb-6">
-                            {section.title}
-                        </h3>
-
-                        <ul className="space-y-2 flex flex-col max-w-32">
-                            {section.links.map((link) => (
-                                <li key={link.name}>
-                                    <Link
-                                        href={link.href}
-                                        className={`${"text-gray-900 text-sm"} hover:text-purple-400`}
-                                    >
-                                        {link.name}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+        <footer className="w-full bg-white border-t border-gray-200 mt-12 py-10 px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl">
+                
+                {/* Logo & Category Grid */}
+                <div className="flex flex-col lg:flex-row gap-8 justify-between">
+                    
+                    {/* Brand Logo */}
+                    <div className="flex-shrink-0 mb-4 lg:mb-0">
+                        <Link href="/">
+                            <img 
+                                src="/assets/logo1.svg" 
+                                alt="Company Logo" 
+                                className="h-10 w-auto object-contain sm:h-12" 
+                            />
+                        </Link>
                     </div>
-                ))}
+
+                    {/* Dynamic Footer Links Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-8 w-full">
+                        {footerData.map((section) => (
+                            <div key={section.title} className="flex flex-col">
+                                <h3 className="font-semibold text-sm sm:text-base text-gray-900 mb-3 sm:mb-4">
+                                    {section.title}
+                                </h3>
+
+                                <ul className="space-y-2 mb-4">
+                                    {section.links.map((link) => (
+                                        <li key={link.name}>
+                                            <Link
+                                                href={link.href}
+                                                className="text-xs sm:text-sm text-gray-600 hover:text-purple-600 transition-colors block leading-snug"
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                {/* Nested Sub-section rendering (e.g. Lending) */}
+                                {section.subSection && (
+                                    <div className="mt-2">
+                                        <h4 className="font-semibold text-sm sm:text-base text-gray-900 mb-2">
+                                            {section.subSection.title}
+                                        </h4>
+                                        <ul className="space-y-2">
+                                            {section.subSection.links.map((subLink) => (
+                                                <li key={subLink.name}>
+                                                    <Link
+                                                        href={subLink.href}
+                                                        className="text-xs sm:text-sm text-gray-600 hover:text-purple-600 transition-colors block leading-snug"
+                                                    >
+                                                        {subLink.name}
+                                                    </Link>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Optional CTA Button */}
+                                {section.button && (
+                                    <div className="mt-4">
+                                        <Link
+                                            href={section.button.href}
+                                            className="inline-block rounded-full bg-purple-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-purple-700"
+                                        >
+                                            {section.button.text}
+                                        </Link>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Divider Line */}
+                <hr className="my-8 border-gray-200" />
+
+                {/* Footer Bottom Disclaimer */}
+                <div className="text-center space-y-1">
+                    <p className="text-xs sm:text-sm text-gray-600">
+                        *These are company numbers as of September, 2025
+                    </p>
+                    <p className="text-xs sm:text-sm font-medium text-gray-800">
+                        © 2026, All rights reserved.
+                    </p>
+                </div>
             </div>
-            <p className='text-lg text-gray-700 text-center'>*These are company numbers as of September, 2025</p>
-            <p className='text-sm text-gray-800 text-center'>© 2026, All rights reserved.</p>
-        </div>
+        </footer>
     )
 }

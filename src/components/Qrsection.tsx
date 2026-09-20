@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 
@@ -38,98 +38,130 @@ const sections = [
 ];
 
 export function Qrsection() {
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
+  // Track overall section scroll progress
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  const qrScale = useTransform(scrollYProgress, [0, 0.35], [0.2, 1]);
-  const circleScale = useTransform(scrollYProgress, [0, 0.35], [1, 2.8]);
-  const radius = useTransform(scrollYProgress, [0, 0.35], [28, 0]);
+  // Phase 1: Background Zoom & Card Expansion (0% -> 30% scroll)
+  const bgScale = useTransform(scrollYProgress, [0, 0.25], [0.3, 3.5]);
+  const containerScale = useTransform(scrollYProgress, [0, 0.25], [0.8, 1]);
+  const borderRadius = useTransform(scrollYProgress, [0, 0.25], [32, 24]);
 
-  const cardsOpacity = useTransform(scrollYProgress, [0.32, 0.45], [0, 1]);
-  const cardsY = useTransform(scrollYProgress, [0.35, 0.55], [80, 0]);
+  // Phase 2: Fade in Horizontal Card Stream (25% -> 35% scroll)
+  const cardsOpacity = useTransform(scrollYProgress, [0.22, 0.32], [0, 1]);
+  const cardsY = useTransform(scrollYProgress, [0.22, 0.32], [40, 0]);
 
-  const currentIndex = useTransform(scrollYProgress, [0.45, 1], [0, sections.length - 1]);
+  // Phase 3: Horizontal Card Scroll (35% -> 100% scroll)
+  // Maps 35%-100% vertical scroll into -0% to -80% horizontal offset for card container
+  const horizontalX = useTransform(scrollYProgress, [0.35, 1], ["0%", "-80%"]);
 
   return (
-    <section ref={ref} className="relative h-[320vh] bg-white">
-      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
+    <section ref={containerRef} className="relative h-[400vh] bg-slate-50">
+      
+      {/* Sticky Screen Viewport */}
+      <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden">
+        
+        {/* PhonePe Dark Purple Concentric Background */}
         <motion.div
-          style={{ scale: circleScale }}
-          className="absolute h-105 w-105 rounded-full bg-[#2B164F]"
+          style={{ scale: bgScale }}
+          className="absolute h-80 w-80 sm:h-96 sm:w-96 rounded-full bg-[#2B164F] shadow-2xl"
         />
 
-        {[1, 2, 3, 4, 5].map((i) => (
+        {/* Ambient Ring Accents */}
+        {[1, 2, 3, 4].map((i) => (
           <motion.div
             key={i}
-            style={{ scale: circleScale }}
-            className="absolute rounded-full border border-white/10"
+            style={{ scale: bgScale }}
+            className="absolute rounded-full border border-white/10 pointer-events-none"
           >
             <div
               style={{
-                width: 60 + i * 150,
-                height: 60 + i * 150,
+                width: 120 + i * 180,
+                height: 120 + i * 180,
               }}
             />
           </motion.div>
         ))}
 
+        {/* Center PhonePe Container */}
         <motion.div
           style={{
-            scale: qrScale,
-            borderRadius: radius,
+            scale: containerScale,
+            borderRadius: borderRadius,
           }}
-          className="relative overflow-hidden bg-white p-3 shadow-2xl"
+          className="relative z-10 mx-4 flex w-full max-w-5xl flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 bg-white/95 backdrop-blur-md p-6 sm:p-10 shadow-2xl border border-gray-100"
         >
-          <div className="flex items-center gap-6">
-            <div className="shrink-0">
+          
+          {/* Left Side: Fixed QR Code Display */}
+          <div className="flex flex-col items-center justify-center shrink-0 text-center lg:text-left border-b lg:border-b-0 lg:border-r border-gray-200/80 pb-6 lg:pb-0 lg:pr-10">
+            <div className="relative rounded-2xl bg-slate-50 p-4 border border-gray-100 shadow-inner">
               <Image
                 src="https://www.phonepe.com/static/qr-0131fe33699f25cd2e104a9c6535f5f5.svg"
-                alt="qr"
-                width={220}
-                height={220}
+                alt="PhonePe QR Code"
+                width={180}
+                height={180}
+                priority
+                className="h-36 w-36 sm:h-48 sm:w-48 object-contain"
               />
             </div>
+            
+            <h2 className="mt-4 text-xl sm:text-2xl font-bold text-[#2B164F]">
+              Scan & Pay
+            </h2>
+            <p className="mt-1 text-xs sm:text-sm font-medium text-gray-500 max-w-xs">
+              Accepted everywhere with fast, one-click UPI payments
+            </p>
+          </div>
 
+          {/* Right Side: Horizontal Sliding Feature Cards */}
+          <motion.div
+            style={{
+              opacity: cardsOpacity,
+              y: cardsY,
+            }}
+            className="relative w-full lg:w-[520px] overflow-hidden"
+          >
+            {/* Scrollable Track */}
             <motion.div
-              style={{
-                opacity: cardsOpacity,
-                y: cardsY,
-              }}
-              className="relative h-80 w-85 overflow-hidden"
+              style={{ x: horizontalX }}
+              className="flex gap-4 sm:gap-6 w-max py-2"
             >
               {sections.map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  className="sticky left-0 top-0 h-full w-full rounded-2xl bg-white p-6 shadow-sm"
-                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                  }}
-                  transition={{
-                    delay: index * 8000,
-                    duration: 2,
-                  }}
-                  style={{
-                    opacity: useTransform(
-                      scrollYProgress,
-                      [0.45 + index * 0.08, 0.55 + index * 0.08],
-                      [0, 1]
-                    ),
-                  }}
+                  className="group flex w-64 sm:w-72 flex-col justify-between rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition-all duration-300 hover:border-purple-200 hover:shadow-xl shrink-0"
                 >
-                  <img src={item.img} alt={item.title} className="mb-4 h-12 w-12" />
-                  <h3 className="text-lg font-semibold">{item.title}</h3>
-                  <p className="mt-2 text-sm text-gray-600">{item.des}</p>
-                </motion.div>
+                  <div>
+                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-purple-50 p-3 transition-transform duration-300 group-hover:scale-110">
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+
+                    <h3 className="mt-5 text-lg font-bold text-gray-900 group-hover:text-[#5F259F] transition-colors">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+                      {item.des}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-[#5F259F]">
+                    <span>Learn More</span>
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </div>
+                </div>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
+
         </motion.div>
       </div>
     </section>

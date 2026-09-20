@@ -139,7 +139,7 @@ export function Oursolutions() {
       <button>
         <div className="text-sm">OUR SOLUTIONS</div>
       </button>
-      <div className="absolute -left-12 top-full m-1 w-3xl h-fit bg-white shadow-lg border-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+      <div className="absolute -left-60 top-full m-1 w-3xl h-fit bg-white shadow-lg border-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
         <div className="flex">
           {/* Left Menu */}
           <div className="w-64 border-r">

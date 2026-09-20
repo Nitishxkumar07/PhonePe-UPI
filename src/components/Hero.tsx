@@ -62,56 +62,58 @@ export const Hero = () => {
     }, [])
 
     return (
-        <section className="relative h-175 overflow-hidden bg-white mt-20">
-            {/* Background */}
-            <img
-                src={sections[current].bgimage}
-                alt=""
-                className="hero inset-0 h-full w-full object-cover -z-10"
-            />
+        <section className="relative min-h-[550px] w-full overflow-hidden bg-white mt-16 sm:mt-20 py-8 lg:py-12">
+  {/* Background */}
+  <img
+    src={sections[current].bgimage}
+    alt=""
+    className="absolute inset-0 h-full w-full object-cover -z-10"
+  />
 
-            <div className="mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-6 text-center">
+  <div className="mx-auto flex h-full max-w-7xl flex-col items-center justify-between px-4 sm:px-6 text-center">
 
-                {/* Text */}
-                <h1 className="max-w-3xl text-3xl font-bold text-[#3D246C] lg:text-4xl">
-                    {sections[current].title}
-                </h1>
+    {/* Text */}
+    <h1 className="max-w-3xl text-2xl sm:text-3xl lg:text-4xl font-bold text-[#3D246C]">
+      {sections[current].title}
+    </h1>
 
-                <p className="mt-5 max-w-2xl text-base leading-8 text-gray-600">
-                    {sections[current].subtitle}
-                </p>
+    <p className="mt-3 sm:mt-5 max-w-2xl text-sm sm:text-base leading-6 sm:leading-8 text-gray-600">
+      {sections[current].subtitle}
+    </p>
 
-                <Link
-                    href="#"
-                    className="mt-3 rounded-full bg-[#6739B7] px-8 py-3 text-lg font-semibold text-white transition hover:scale-105 hover:bg-[#5b2fb3]"
-                >
-                    {sections[current].button}
-                </Link>
+    <Link
+      href="#"
+      className="mt-4 inline-block rounded-full bg-[#6739B7] px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-lg font-semibold text-white transition hover:scale-105 hover:bg-[#5b2fb3]"
+    >
+      {sections[current].button}
+    </Link>
 
-                {/* Image */}
-                <div className="mt-2 flex justify-center">
-                    <img
-                        src={sections[current].image}
-                        alt=""
-                        className="max-h-90 w-auto object-contain"
-                    />
-                </div>
+    {/* Image */}
+    <div className="mt-6 flex justify-center w-full max-w-md sm:max-w-lg lg:max-w-xl">
+      <img
+        src={sections[current].image}
+        alt=""
+        className="max-h-52 sm:max-h-72 lg:max-h-96 w-auto object-contain"
+      />
+    </div>
 
-                {/* Dots */}
-                <div className="mt-12 flex gap-4">
-                    {sections.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setCurrent(index)}
-                            className={`h-3 rounded-full transition-all duration-300 ${current === index
-                                    ? "w-10 bg-[#6739B7]"
-                                    : "w-3 bg-gray-300 hover:bg-gray-400"
-                                }`}
-                        />
-                    ))}
-                </div>
-            </div>
-        </section>
+    {/* Dots */}
+    <div className="mt-6 sm:mt-8 flex gap-2 sm:gap-4">
+      {sections.map((_, index) => (
+        <button
+          key={index}
+          onClick={() => setCurrent(index)}
+          aria-label={`Go to slide ${index + 1}`}
+          className={`h-2.5 sm:h-3 rounded-full transition-all duration-300 ${
+            current === index
+              ? "w-8 sm:w-10 bg-[#6739B7]"
+              : "w-2.5 sm:w-3 bg-gray-300 hover:bg-gray-400"
+          }`}
+        />
+      ))}
+    </div>
+  </div>
+</section>
     );
 }
 

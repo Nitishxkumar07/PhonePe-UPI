@@ -1,7 +1,8 @@
 "use client"
 import React from 'react'
-import Link from 'next/link';
-import { motion } from "framer-motion";
+import Link from 'next/link'
+import { motion, type Variants } from "framer-motion"
+
 export const solutions = [
   {
     id: 1,
@@ -32,30 +33,75 @@ export const solutions = [
     link: "/lending",
   },
 ];
-export const Card = () => {
-  return (
-    <div className='flex flex-row flex-wrap items-center justify-center mt-40 space-x-5'>
-      <motion.div
-        initial={{ opacity: 0, y: 80 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{
-          duration: 0.7,
-          ease: "easeOut",
-        }}
-        className="rounded-3xl bg-white flex flex-row p-8 shadow-lg"
-      >
-        {solutions.map((item, index) => (
-          <Link key={index} href={item.link} className='flex flex-col z-30 shadow-xl shadow-blue-300 p-4 space-y-2 border border-transparent h-fit justify-center items-center hover:scale-105 hover:-translate-y-2 hover:shadow-2xl duration-300'>
-            <img src={item.image} alt="" className='h-32 w-44 rounded-2xl' />
-            <h1 className='text-4xl font-semibold text-blue-950'>{item.title}</h1>
-            <p className='text-sm font-semibold'>{item.description}</p>
-            <p className='text-6xl text-blue-900 mt-2 text-right'>→</p>
-          </Link>
-        ))}
-      </motion.div>
-    </div>
-  )
+
+// Motion container variants for staggered children entrance
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
 }
 
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+}
 
+export const Card = () => {
+  return (
+    <section className="w-full px-4 py-12 md:py-20 lg:px-18">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="mx-auto grid max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {solutions.map((item) => (
+          <motion.div key={item.id} variants={cardVariants} className="h-full">
+            <Link
+              href={item.link}
+              className="group flex h-full flex-col justify-between rounded-2xl border border-gray-100 bg-white p-6 shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:border-blue-500/30 hover:shadow-xl hover:shadow-blue-500/10"
+            >
+              <div>
+                {/* Image Container with Consistent Aspect Ratio */}
+                <div className="relative mb-5 aspect-video w-full overflow-hidden rounded-xl bg-slate-50 flex items-center justify-center">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Content */}
+                <h2 className="text-2xl font-bold tracking-tight text-blue-950 transition-colors group-hover:text-blue-600">
+                  {item.title}
+                </h2>
+                <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+
+              {/* Action Link Footer */}
+              <div className="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                <span className="text-xs font-semibold uppercase tracking-wider text-blue-900 group-hover:text-blue-600">
+                  Explore
+                </span>
+                <span className="text-xl text-blue-900 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-blue-600">
+                  →
+                </span>
+              </div>
+            </Link>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
+  )
+}
