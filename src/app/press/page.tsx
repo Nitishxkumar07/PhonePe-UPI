@@ -1,6 +1,6 @@
 "use cilent"
-import PressHero from '@/components/presscompo/Presshero'
-import Releases from '@/components/presscompo/Releases'
+import PressHero from '@/components/Pressscompo/Presshero'
+import Releases from '@/components/Pressscompo/Releases'
 
 export default function page() {
   return (
