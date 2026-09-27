@@ -1,12 +1,12 @@
-import { Card } from "@/components/Card";
-import Country from "@/components/Country";
-import { Hero } from "@/components/Hero";
-import InvestmentSection from "@/components/InvestmentSection";
-import { Qrsection } from "@/components/Qrsection";
-import Review from "@/components/Review";
-import Cards from "@/components/Cards";
-import Travel from "@/components/Travel";
-import PhonePePulse from "@/components/PhonePePulse";
+import { Card } from "@/components/Homecompo/Card";
+import Country from "@/components/Homecompo/Country";
+import { Hero } from "@/components/Homecompo/Hero";
+import InvestmentSection from "@/components/Homecompo/InvestmentSection";
+import { Qrsection } from "@/components/Homecompo/Qrsection";
+import Review from "@/components/Homecompo/Review";
+import Cards from "@/components/Homecompo/Cards";
+import Travel from "@/components/Homecompo/Travel";
+import PhonePePulse from "@/components/Homecompo/PhonePePulse";
 
 export default function Home() {
   return (

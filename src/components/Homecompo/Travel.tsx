@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 const travel = [
   {
@@ -98,7 +99,7 @@ export default function Travel() {
         {/* Call to Action Button */}
         <div className="mt-10 sm:mt-14 flex justify-center">
           <button className="group inline-flex items-center gap-3 rounded-full bg-[#450fa2] px-8 py-3.5 text-base font-medium text-white shadow-lg transition-all duration-300 hover:bg-[#5728a6] hover:shadow-purple-900/25 active:scale-95 sm:text-lg">
-            <span>Explore Now</span>
+            <Link href={"/travel"}>Explore Now</Link>
             <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </div>

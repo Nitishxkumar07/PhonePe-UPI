@@ -9,14 +9,14 @@ export const solutions = [
     title: "Payments",
     description: "Manage all your payments seamlessly",
     image: "https://www.phonepe.com/static/wealthIconPaymments-02b7e2e830614a7be41fc60d876f492b.svg",
-    link: "/payments",
+    link: "/payment",
   },
   {
     id: 2,
     title: "Investments",
     description: "Build, manage & grow your wealth",
     image: "https://plus.unsplash.com/premium_photo-1681487769650-a0c3fbaed85a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW52ZXN0bWVudHxlbnwwfHwwfHx8MA%3D%3D",
-    link: "/investments",
+    link: "/investment",
   },
   {
     id: 3,
